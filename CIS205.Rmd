@@ -1,0 +1,121 @@
+---
+title: "CIS 205 Course Assessment Summary"
+output:
+  html_document:
+    df_print: paged
+  fig_width: 4
+  fig_height: 4
+  html_notebook: default
+  pdf_document: default
+  word_document: default
+---
+<style>
+        table {
+            width: 350px;
+            border-collapse: collapse;
+        }
+@media print {
+      .pagebreak { page-break-before: always; }
+    }
+    </style>
+<font size="4">
+Instructors: **Craig Nelson**  
+Course Sections: **001, 950, 951**  
+Semester: **Fall 2020**  
+Performance Goal: **75% of students meet or exceed expectations.**  
+  
+<center>
+<table>
+    <tr>
+        <th colspan="2"><u>Performance Rubric</u></th>
+    </tr>
+    <tr>
+        <td>Below Expectations (1):</td>
+        <td>0 - 69.9%</td>
+    </tr>
+    <tr>
+        <td>Meets Expectations (2):</td>
+        <td>70% - 89.9%</td>
+    </tr>
+    <tr>
+        <td>Exceeds Expectations (3):</td>
+        <td>90% - 100%</td>
+    </tr>
+</table>
+</font>
+</center>
+****
+<center>
+```{r, echo=FALSE, results='hide', fig.width=6.5, fig.height=6, fig.align="center",  warning=FALSE, message=FALSE}
+source("CourseProcessor.R")
+fig.dim = c(6, 6)
+course_processor("CIS205.csv", "CIS205")
+```
+</center>
+<div class="pagebreak"> </div>
+****
+<font size="3">
+**Course Learning Outcome 1**: Use a modern database management program such as Oracle, MySQL and PostgreSQL to perform such tasks as writing operational and correct SQL (DDL, DML and DCL) statements.
+  
+<center>
+```{r, echo=FALSE, results='hide', fig.width=6.5, fig.height=6, fig.align="center",  warning=FALSE, message=FALSE}
+source("CLOProcessor.R")
+fig.dim = c(6, 6)
+processor(1, "CIS205.csv", "CIS205")
+```
+</center>
+<div class="pagebreak"> </div>
+****
+**Course Learning Outcome 2**: Write SQL statements that perform fundamental database concepts, including Relational Algebra, and successfully use a Relational Database System.
+  
+<center>
+```{r, echo=FALSE, results='hide', fig.width=6.5, fig.height=6, fig.align="center"}
+processor(2, "CIS205.csv", "CIS205")
+```
+</center>
+<div class="pagebreak"> </div>
+****
+**Course Learning Outcome 3**: Create and translate Entity Relationship (ER) Diagrams using a software diagramming tool.
+  
+<center>
+```{r, echo=FALSE, results='hide', fig.width=6.5, fig.height=6, fig.align="center"}
+processor(3, "CIS205.csv", "CIS205")
+```
+</center>
+<div class="pagebreak"> </div>
+****
+**Course Learning Outcome 4**: Explain common ethical issues related to the use of information technology systems and the handling of data, including privacy and security issues.
+  
+<center>
+```{r, echo=FALSE, results='hide', fig.width=6.5, fig.height=6, fig.align="center"}
+processor(4, "CIS205.csv", "CIS205")
+```
+</center>
+<div class="pagebreak"> </div>
+****
+**Course Learning Outcome 5**: Write operational and correct SQL (DDL, DML and DCL) statements.
+  
+<center>
+```{r, echo=FALSE, results='hide', fig.width=6.5, fig.height=6, fig.align="center"}
+processor(5, "CIS205.csv", "CIS205")
+```
+</center>
+<div class="pagebreak"> </div>
+****
+**Course Learning Outcome 6**: Describe new concepts and terminology in DBMS such as Data Warehousing, Data Mining, NoSQL and Big Data.
+  
+<center>
+```{r, echo=FALSE, results='hide', fig.width=6.5, fig.height=6, fig.align="center"}
+processor(6, "CIS205.csv", "CIS205")
+```
+</center>
+<div class="pagebreak"> </div>
+****
+**Course Learning Outcome 7**: Implement a relational database from initial requirements and conceptual design (ER Diagram) to the physical database in a modern enterprise relational database management system.
+  
+<center>
+```{r, echo=FALSE, results='hide', fig.width=6.5, fig.height=6, fig.align="center"}
+processor(7, "CIS205.csv", "CIS205")
+```
+</center>
+</font>
