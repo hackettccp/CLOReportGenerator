@@ -58,7 +58,7 @@ course_processor("CSCI213.csv", "CSCI213")
 **Course Learning Outcome 1**: Diagram the digital components of computing architecture and evaluate them for accuracy.  
   
 <center>
-```{r, echo=FALSE, results='hide', fig.width=6.5, fig.height=6, fig.align="center",  warning=FALSE, message=FALSE}
+```{r, echo=FALSE, results='hide', fig.width=7, fig.height=3, fig.align="center",  warning=FALSE, message=FALSE}
 source("CLOProcessor.R")
 fig.dim = c(6, 6)
 processor(1, "CSCI213.csv", "CSCI213")
@@ -69,7 +69,7 @@ processor(1, "CSCI213.csv", "CSCI213")
 **Course Learning Outcome 2**: Choose the optimal format to represent numerical and non-numerical data by estimating their memory requirements and how this choice could affect accuracy and precision.
   
 <center>
-```{r, echo=FALSE, results='hide', fig.width=6.5, fig.height=6, fig.align="center"}
+```{r, echo=FALSE, results='hide', fig.width=7, fig.height=3, fig.align="center"}
 processor(2, "CSCI213.csv", "CSCI213")
 ```
 </center>
@@ -78,7 +78,7 @@ processor(2, "CSCI213.csv", "CSCI213")
 **Course Learning Outcome 3**: Describe complex and reduced instruction set computing and apply the concepts of an instruction set architecture through the use of an assembly language.
   
 <center>
-```{r, echo=FALSE, results='hide', fig.width=6.5, fig.height=6, fig.align="center"}
+```{r, echo=FALSE, results='hide', fig.width=7, fig.height=3, fig.align="center"}
 processor(3, "CSCI213.csv", "CSCI213")
 ```
 </center>
@@ -87,7 +87,7 @@ processor(3, "CSCI213.csv", "CSCI213")
 **Course Learning Outcome 4**: Identify interrupt mechanisms and describe ways I/O control, data transfer, and dataflow are implemented.
   
 <center>
-```{r, echo=FALSE, results='hide', fig.width=6.5, fig.height=6, fig.align="center"}
+```{r, echo=FALSE, results='hide', fig.width=7, fig.height=3, fig.align="center"}
 processor(4, "CSCI213.csv", "CSCI213")
 ```
 </center>
@@ -96,7 +96,7 @@ processor(4, "CSCI213.csv", "CSCI213")
 **Course Learning Outcome 5**: Explain the design and implementations of different types of storage devices, memory hierarchy, cache memory, and addressing schemes.
   
 <center>
-```{r, echo=FALSE, results='hide', fig.width=6.5, fig.height=6, fig.align="center"}
+```{r, echo=FALSE, results='hide', fig.width=7, fig.height=3, fig.align="center"}
 processor(5, "CSCI213.csv", "CSCI213")
 ```
 </center>
@@ -105,7 +105,7 @@ processor(5, "CSCI213.csv", "CSCI213")
 **Course Learning Outcome 6**: Describe the functional components of a modern central processing unit and how processor performance can be improved by pipelining and superscalar architectures.
   
 <center>
-```{r, echo=FALSE, results='hide', fig.width=6.5, fig.height=6, fig.align="center"}
+```{r, echo=FALSE, results='hide', fig.width=7, fig.height=3, fig.align="center"}
 processor(6, "CSCI213.csv", "CSCI213")
 ```
 </center>
@@ -115,7 +115,7 @@ processor(6, "CSCI213.csv", "CSCI213")
 **Course Learning Outcome 7**: Examine the essential concepts of parallel processing, multicore and multithreaded processors, GPUs and special-purpose processors.
   
 <center>
-```{r, echo=FALSE, results='hide', fig.width=6.5, fig.height=6, fig.align="center"}
+```{r, echo=FALSE, results='hide', fig.width=7, fig.height=3, fig.align="center"}
 processor(7, "CSCI213.csv", "CSCI213")
 ```
 </center>
