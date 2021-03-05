@@ -91,7 +91,7 @@ course_processor <- function(filename, course_code) {
                  color = NA) +
     scale_x_continuous(breaks = seq(0, xscale, 10),
                        limits = c(0, xscale)) +
-    labs(x = "Discrete Assessments", y = "", title = "Course Assessment Density") +
+    labs(x = "Discrete Assessments", y = "", title = "Outcome Density") +
     scale_fill_manual(
       values = cc,
       name = "",

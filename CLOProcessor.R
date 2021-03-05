@@ -75,7 +75,7 @@ processor <- function(c, filename, course_code) {
   #Section Dist
   p1 <- ggplot(data = df2, aes(x = section)) +
     geom_bar(aes(fill = desc), position = "fill") +
-    labs(subtitle = "Section Distributions", x = "", y = "") +
+    labs(subtitle = "Course Sections", x = "", y = "") +
     theme(
       axis.text.x = element_text(size = 10),
       axis.text.y = element_text(size = 10),
@@ -108,42 +108,42 @@ processor <- function(c, filename, course_code) {
     )
   
   
-  means <-
-    data.frame(
-      section = character(),
-      mn = numeric(),
-      std = numeric(),
-      stringsAsFactors = FALSE
-    )
-  for (i in sections) {
-    tempdf <- subset(df, section == i)
-    tempmean <-
-      (tempdf$below[1] + tempdf$meets[1] * 2 + tempdf$exceeds[1] * 3) / (tempdf$below[1] + tempdf$meets[1] + tempdf$exceeds[1])
-    tempvar <-
-      var(as.numeric(as.character(subset(df2, section == i)$score)))
-    tempsd <- sqrt(tempvar)
-    means <- rbind(means,
-                   data.frame(
-                     section = i,
-                     mn = tempmean,
-                     std = tempsd
-                   ))
-  }
-  p3 <- zplot(means)
+  #means <-
+  #  data.frame(
+  #    section = character(),
+  #    mn = numeric(),
+  #    std = numeric(),
+  #    stringsAsFactors = FALSE
+  #  )
+  #for (i in sections) {
+  #  tempdf <- subset(df, section == i)
+  #  tempmean <-
+  #    (tempdf$below[1] + tempdf$meets[1] * 2 + tempdf$exceeds[1] * 3) / (tempdf$below[1] + tempdf$meets[1] + tempdf$exceeds[1])
+  #  tempvar <-
+  #    var(as.numeric(as.character(subset(df2, section == i)$score)))
+  #  tempsd <- sqrt(tempvar)
+  #  means <- rbind(means,
+  #                 data.frame(
+  #                   section = i,
+  #                   mn = tempmean,
+  #                   std = tempsd
+  #                 ))
+  #}
+  #p3 <- dens(df, df2, xscale, cc)
   
   
-  if (length(df$below) < 2) {
-    figure <- plot_grid(p1, p3, nrow = 2, rel_heights = c(1, 1.25))
-  }
-  else {
-    figure <-
-      plot_grid(
-        p1,
-        plot_grid(p2, p3, ncol = 2, rel_widths = c(2, 4)),
-        nrow = 2,
-        rel_heights = c(1, 1.25)
-      )
-  }
+  #if (length(df$below) < 2) {
+    figure <- plot_grid(p2, p1, nrow = 1, rel_widths = c(.3, 1))
+  #}
+  #else {
+  #  figure <-
+  #    plot_grid(
+  #      p1,
+  #      plot_grid(p2, p3, ncol = 2, rel_widths = c(2, 4)),
+  #      nrow = 2,
+  #      rel_heights = c(1, 1.25)
+  #    )
+  #}
   return(figure)
   #ggsave(figure, file=paste0(course_code, "_CLO", clo, ".png"), width = 18, height = 15, units = "cm")
   
