@@ -6,6 +6,7 @@ processor <- function(c, filename, course_code) {
   library(svglite)
   library(reshape2)
   library(hash)
+  library(gridExtra)
   source("Util.R")
   primary <- read.csv(
     filename,
@@ -72,6 +73,34 @@ processor <- function(c, filename, course_code) {
   cc[["Meets Expectations"]] <- "goldenrod1"
   cc[["Exceeds Expectations"]] <- "chartreuse4"
   
+  
+  #Data Table
+  ndata <- select(df, section, below, meets, exceeds)
+  totals <-
+    c("Total", sum(df$below), sum(df$meets), sum(df$exceeds))
+  
+  ndata <- rbind(ndata, totals)
+  
+  ndata <- transform(ndata, below = as.numeric(below))
+  ndata <- transform(ndata, meets = as.numeric(meets))
+  ndata <- transform(ndata, exceeds = as.numeric(exceeds))
+  
+  ndata <-
+    ndata %>% mutate(total = rowSums(select_if(., is.numeric)))
+  
+  ndata <- rename(
+    ndata,
+    "Course Section" = section,
+    "Below Expectations" = below,
+    "Meets Expectations" = meets,
+    "Exceeds Expectations" = exceeds,
+    "Total" = total
+  )
+  
+  tt3 <- ttheme_default()
+  tbl <- tableGrob(ndata, rows = NULL, theme = tt3)
+  
+  
   #Section Dist
   p1 <- ggplot(data = df2, aes(x = section)) +
     geom_bar(aes(fill = desc), position = "fill") +
@@ -84,21 +113,22 @@ processor <- function(c, filename, course_code) {
     geom_hline(aes(yintercept = .75), linetype = "dashed") +
     scale_y_continuous(labels = scales::percent) +
     scale_fill_manual(
-      values = values(cc, levels(df2$desc), USE.NAMES = FALSE),
+      values = values(cc, 
+                      levels(df2$desc), 
+                      USE.NAMES = FALSE
+      ),
       name = "",
-      labels = levels(df2$desc)
+      labels = levels(df2$desc), drop = FALSE
     ) +
     theme(legend.position = "right",
           legend.text = element_text(size = 10))
-  
   #Course Dist
   p2 <- ggplot(data = df2, aes(x = "", fill = desc)) +
     geom_bar(position = "fill") +
-    scale_fill_manual(values = values(cc, levels(df2$desc), USE.NAMES =
-                                        FALSE),
+    scale_fill_manual(values = values(cc, levels(df2$desc), USE.NAMES = FALSE),
                       name = "") +
-    labs(x = "", y = "", subtitle = "All Sections") +
     scale_y_continuous(labels = scales::percent) +
+    labs(x = "", y = "", subtitle = "All Sections") +
     geom_hline(aes(yintercept = .75), linetype = "dashed") +
     theme(
       legend.position = "none",
@@ -129,21 +159,50 @@ processor <- function(c, filename, course_code) {
   #                   std = tempsd
   #                 ))
   #}
-  #p3 <- dens(df, df2, xscale, cc)
+  xscale <-
+    max(apply(
+      X = select(df, "below", "meets", "exceeds"),
+      MARGIN = 1,
+      FUN = max
+    )) + 10
+  p3 <- dens(df, df2, xscale, cc)
   
   
-  #if (length(df$below) < 2) {
-    figure <- plot_grid(p2, p1, nrow = 1, rel_widths = c(.3, 1))
-  #}
-  #else {
-  #  figure <-
-  #    plot_grid(
-  #      p1,
-  #      plot_grid(p2, p3, ncol = 2, rel_widths = c(2, 4)),
-  #      nrow = 2,
-  #      rel_heights = c(1, 1.25)
-  #    )
-  #}
+  if (length(df$below) < 2) {
+    figure <-
+      plot_grid(
+        tbl,
+        plot_grid(
+          ggplot() + theme(panel.background = element_rect(fill = "white")),
+          p1,
+          ggplot() + theme(panel.background = element_rect(fill = "white")),
+          ncol = 3,
+          rel_widths = c(.5, 1, .5)
+        ),
+        nrow = 2,
+        rel_heights = c(1, 1.25)
+      )
+    
+    
+    
+    plot_grid(ncol = 2,
+              tbl, p2,
+              rel_widths = c(1, .5))
+  }
+  else {
+    figure <-
+      plot_grid(
+        tbl,
+        plot_grid(
+          p1,
+          plot_grid(p2, p3, ncol = 2, rel_widths = c(2, 4)),
+          nrow = 2,
+          rel_heights = c(1, 1.25)
+        ),
+        nrow = 2,
+        rel_heights = c(.75, 1.5)
+      )
+  }
   return(figure)
   #ggsave(figure, file=paste0(course_code, "_CLO", clo, ".png"), width = 18, height = 15, units = "cm")
   
@@ -152,24 +211,120 @@ processor <- function(c, filename, course_code) {
 
 dens <- function(df, df2, xscale, cc) {
   p <- ggplot(data = df) +
-    geom_density(aes(x = below, fill = "below"),
-                 alpha = 0.75,
-                 color = NA) +
-    geom_density(aes(x = meets, fill = "meets"),
-                 alpha = 0.75,
-                 color = NA) +
-    geom_density(aes(x = exceeds, fill = "xceeds"),
-                 alpha = 0.75,
-                 color = NA) +
-    scale_x_continuous(breaks = seq(0, xscale[1], 10),
-                       limits = c(0, xscale[1])) +
-    labs(x = "Discrete Assessments", y = "", subtitle = "Assessment Density") +
-    scale_fill_manual(values = values(cc, levels(df2$desc), USE.NAMES =
+    
+    #geom_density(aes(x = meets, fill = "meets"),
+    #             alpha = 0.5,
+    #             color = NA) +
+    #geom_density(aes(x = exceeds, fill = "xceeds"),
+    #             alpha = 0.5,
+    #             color = NA) +
+    # geom_vline(
+    #   aes(xintercept = round(mean(below), 0)),
+    #   linetype = "solid",
+    #   size = 1,
+  #   color = "firebrick3"
+  # ) +
+  # geom_vline(
+  #   aes(xintercept = round(mean(meets), 0)),
+  #   linetype = "solid",
+  #   size = 1,
+  #   color = "goldenrod1"
+  # ) +
+  # geom_vline(
+  #   aes(xintercept = round(mean(exceeds), 0)),
+  #   linetype = "solid",
+  #   size = 1,
+  #   color = "chartreuse4"
+  # ) +
+  # geom_label_repel(
+  #   data = data.frame(mean = mean(df$below)),
+  #   xlim = c(-1, Inf),
+  #   ylim = c(0, Inf),
+  #   mapping = aes(
+  #     x = mean,
+  #     y = 0.02,
+  #     label = paste0(round(mean, 0))
+  #   ),
+  #   fill = "firebrick3",
+  #   size = 5,
+  #   box.padding = unit(1, "lines")
+  # ) +
+  
+  # geom_label_repel(
+  #   data = data.frame(mean = mean(df$exceeds)),
+  #   xlim = c(-1, Inf),
+  #   ylim = c(0, Inf),
+  #   mapping = aes(
+  #     x = mean,
+  #     y = 0.02,
+  #     label = paste0(round(mean, 0))
+  #   ),
+  #   fill = "chartreuse4",
+  #   size = 5,
+  #   box.padding = unit(1, "lines")
+  # ) +
+  
+  #geom_label_repel(
+  #  data = data.frame(mean=c(mean(df$below), mean(df$meets), mean(df$exceeds))),
+  #  xlim = c(0, Inf),
+  #  ylim = c(0, Inf),
+  #  mapping = aes(
+  #    x = mean,
+  #    y = 0,
+  #   label = paste0(round(mean, 0)),
+  #  ),
+  #  fill=cc,
+  #  size = 3,
+  #  box.padding = unit(1.5, "lines")
+  #) +
+  
+  scale_x_continuous(breaks = seq(0, xscale, 10),
+                     limits = c(0, xscale)) +
+    labs(
+      x = "Students",
+      y = "",
+      title = paste0("Student Success Densities - CLO ", df$clonum),
+      subtitle = "Average number of students below, meeting, or \nexceeding expectations per section"
+    ) +
+    scale_fill_manual(values = values(cc, levels(df$desc), USE.NAMES =
                                         FALSE),
                       name = "") +
     theme(legend.position = "none",
           legend.text = element_text(size = 10))
-  return(p)
+  
+  if (length(df$below) > 1) {
+    p <- p + geom_density(aes(x = below, fill = "below"),
+                          alpha = 0.5,
+                          color = NA)
+  }
+  if (length(df$meets) > 1) {
+    p <- p + geom_density(aes(x = meets, fill = "meets"),
+                          alpha = 0.5,
+                          color = NA)
+  }
+  if (length(df$exceeds) > 1) {
+    p <- p + geom_density(aes(x = exceeds, fill = "exceeds"),
+                          alpha = 0.5,
+                          color = NA)
+  }
+  sumofmeans<-sum(c(mean(df$below), mean(df$meets), mean(df$exceeds)))
+  p <- p + geom_label_repel(
+    data = data.frame(mean = c(
+      mean(df$below), mean(df$meets), mean(df$exceeds)
+    )),
+    xlim = c(-1, Inf),
+    ylim = c(0, Inf),
+    mapping = aes(
+      x = mean,
+      y = 0,
+      label = paste0(round(mean, 0), "\n", 
+                     round(mean/sumofmeans*100, 0), "%")
+    ),
+    fill = c("firebrick3", "goldenrod1", "chartreuse4"),
+    size = 5,
+    box.padding = unit(1, "lines")
+  )
+    return(p)
 }
 
 

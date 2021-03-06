@@ -72,13 +72,13 @@ course_processor <- function(filename, course_code) {
         "Below Expectations",
         "Meets Expectations",
         "Exceeds Expectations"
-      )
+      ), drop = FALSE
     ) +
     theme(legend.position = "right",
           legend.text = element_text(size = 10))
   
   
-  
+  sumofmeans<-sum(c(mean(df_wide$below), mean(df_wide$meets), mean(df_wide$exceeds)))
   p2 <- ggplot(data = df_wide) +
     geom_density(aes(x = below, fill = "below"),
                  alpha = 0.75,
@@ -89,9 +89,81 @@ course_processor <- function(filename, course_code) {
     geom_density(aes(x = exceeds, fill = "xceeds"),
                  alpha = 0.75,
                  color = NA) +
+    # geom_vline(
+    #   aes(xintercept = round(mean(below), 0)),
+    #   linetype = "solid",
+    #   size = 1,
+    #   color = "firebrick3"
+    # ) +
+    # geom_vline(
+    #   aes(xintercept = round(mean(meets), 0)),
+    #   linetype = "solid",
+    #   size = 1,
+    #   color = "goldenrod1"
+    # ) +
+    # geom_vline(
+    #   aes(xintercept = round(mean(exceeds), 0)),
+    #   linetype = "solid",
+    #   size = 1,
+    #   color = "chartreuse4"
+    # ) +
+    geom_label_repel(
+      data = data.frame(mean = c(mean(df_wide$below), mean(df_wide$meets), mean(df_wide$exceeds))),
+      xlim = c(-1, Inf),
+      ylim = c(0, Inf),
+      mapping = aes(
+        x = mean,
+        y = 0,
+        label = paste0(round(mean, 0), "\n", 
+                       round(mean/sumofmeans*100, 0), "%")
+      ),
+      fill = cc,
+      size = 5,
+      box.padding = unit(1, "lines")
+    ) +
+    # geom_label_repel(
+    #   data = data.frame(mean = round(mean(df_wide$below), 0)),
+    #   xlim = c(-1, Inf),
+    #   ylim = c(0, Inf),
+    #   mapping = aes(
+    #     x = mean,
+    #     y = 0.02,
+    #     label = paste0(round(mean, 0))
+    #   ),
+    #   fill = "firebrick3",
+    #   size = 5,
+    #   box.padding = unit(1, "lines")
+    # ) +
+    # geom_label_repel(
+    #   data = data.frame(mean = round(mean(df_wide$meets), 0)),
+    #   xlim = c(-1, Inf),
+    #   ylim = c(0, Inf),
+    #   mapping = aes(
+    #     x = mean,
+    #     y = 0.02,
+    #     label = paste0(round(mean, 0))
+    #   ),
+    #   fill = "goldenrod1",
+    #   size = 5,
+    #   box.padding = unit(1, "lines")
+    # ) +
+    # geom_label_repel(
+    #   data = data.frame(mean = round(mean(df_wide$exceeds), 0)),
+    #   xlim = c(-1, Inf),
+    #   ylim = c(0, Inf),
+    #   mapping = aes(
+    #     x = mean,
+    #     y = 0.02,
+    #     label = paste0(round(mean, 0))
+    #   ),
+    #   fill = "chartreuse4",
+    #   size = 5,
+    #   box.padding = unit(1, "lines")
+    # ) +
     scale_x_continuous(breaks = seq(0, xscale, 10),
                        limits = c(0, xscale)) +
-    labs(x = "Discrete Assessments", y = "", title = "Outcome Density") +
+    labs(x = "Students", y = "", title = paste0(course_code, " Student Success Densities"),
+         subtitle="Average number of students below, meeting, or exceeding expectations") +
     scale_fill_manual(
       values = cc,
       name = "",

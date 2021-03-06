@@ -58,7 +58,7 @@ course_processor("CSCI211.csv", "CSCI211")
 **Course Learning Outcome 1**: Create linear data structures (linked lists, stacks, and queues) and describe the characteristics of each.  
   
 <center>
-```{r, echo=FALSE, results='hide', fig.width=7, fig.height=3, fig.align="center",  warning=FALSE, message=FALSE}
+```{r, echo=FALSE, results='hide', fig.width=8, fig.height=6, fig.align="center",  warning=FALSE, message=FALSE}
 source("CLOProcessor.R")
 fig.dim = c(6, 6)
 processor(1, "CSCI211.csv", "CSCI211")
@@ -69,7 +69,7 @@ processor(1, "CSCI211.csv", "CSCI211")
 **Course Learning Outcome 2**: Apply iterative and recursive algorithms to maintain, sort, and search data structures.
   
 <center>
-```{r, echo=FALSE, results='hide', fig.width=7, fig.height=3, fig.align="center"}
+```{r, echo=FALSE, results='hide', fig.width=8, fig.height=6, fig.align="center"}
 processor(2, "CSCI211.csv", "CSCI211")
 ```
 </center>
@@ -78,7 +78,7 @@ processor(2, "CSCI211.csv", "CSCI211")
 **Course Learning Outcome 3**: Design and implement hashing functions and collision-resolution algorithms for a hash table and analyze the computational complexity of such functions.
   
 <center>
-```{r, echo=FALSE, results='hide', fig.width=7, fig.height=3, fig.align="center"}
+```{r, echo=FALSE, results='hide', fig.width=8, fig.height=6, fig.align="center"}
 processor(3, "CSCI211.csv", "CSCI211")
 ```
 </center>
@@ -87,7 +87,7 @@ processor(3, "CSCI211.csv", "CSCI211")
 **Course Learning Outcome 4**: Create non-linear data structures (unbalanced and balanced trees, graphs, and heaps) and describe the characteristics of each.
   
 <center>
-```{r, echo=FALSE, results='hide', fig.width=7, fig.height=3, fig.align="center"}
+```{r, echo=FALSE, results='hide', fig.width=8, fig.height=6, fig.align="center"}
 processor(4, "CSCI211.csv", "CSCI211")
 ```
 </center>
@@ -96,7 +96,7 @@ processor(4, "CSCI211.csv", "CSCI211")
 **Course Learning Outcome 5**: Apply algorithms to traverse linear and non-linear data structures.
   
 <center>
-```{r, echo=FALSE, results='hide', fig.width=7, fig.height=3, fig.align="center"}
+```{r, echo=FALSE, results='hide', fig.width=8, fig.height=6, fig.align="center"}
 processor(5, "CSCI211.csv", "CSCI211")
 ```
 </center>
@@ -105,7 +105,7 @@ processor(5, "CSCI211.csv", "CSCI211")
 **Course Learning Outcome 6**: Estimate and compare the temporal and spatial complexity of algorithms for the maintenance, searching, and sorting of both linear and non-linear data structures.
   
 <center>
-```{r, echo=FALSE, results='hide', fig.width=7, fig.height=3, fig.align="center"}
+```{r, echo=FALSE, results='hide', fig.width=8, fig.height=6, fig.align="center"}
 processor(6, "CSCI211.csv", "CSCI211")
 ```
 </center>

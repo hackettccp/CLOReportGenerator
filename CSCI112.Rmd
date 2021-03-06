@@ -58,7 +58,7 @@ course_processor("CSCI112.csv", "CSCI112")
 **Course Learning Outcome 1**: Create object-oriented software that implements aggregation, inheritance, and polymorphism independently and as a member of a team.  
   
 <center>
-```{r, echo=FALSE, results='hide', fig.width=7, fig.height=3, fig.align="center",  warning=FALSE, message=FALSE}
+```{r, echo=FALSE, results='hide', fig.width=8, fig.height=8, fig.align="center",  warning=FALSE, message=FALSE}
 source("CLOProcessor.R")
 fig.dim = c(6, 6)
 processor(1, "CSCI112.csv", "CSCI112")
@@ -69,7 +69,7 @@ processor(1, "CSCI112.csv", "CSCI112")
 **Course Learning Outcome 2**: Create event-driven software that implements event handling to respond to user-generated events and program exceptions.
   
 <center>
-```{r, echo=FALSE, results='hide', fig.width=7, fig.height=3, fig.align="center"}
+```{r, echo=FALSE, results='hide', fig.width=8, fig.height=8, fig.align="center"}
 processor(2, "CSCI112.csv", "CSCI112")
 ```
 </center>
@@ -78,7 +78,7 @@ processor(2, "CSCI112.csv", "CSCI112")
 **Course Learning Outcome 3**: Evaluate software based on specification documents and validate software through test plans, integration tests, and unit tests independently and as a member of a team.
   
 <center>
-```{r, echo=FALSE, results='hide', fig.width=7, fig.height=3, fig.align="center"}
+```{r, echo=FALSE, results='hide', fig.width=8, fig.height=8, fig.align="center"}
 processor(3, "CSCI112.csv", "CSCI112")
 ```
 </center>
@@ -87,7 +87,7 @@ processor(3, "CSCI112.csv", "CSCI112")
 **Course Learning Outcome 4**: Describe the use and importance of Application Programming Interfaces (APIs) in modern software development and create software that uses APIs.
   
 <center>
-```{r, echo=FALSE, results='hide', fig.width=7, fig.height=3, fig.align="center"}
+```{r, echo=FALSE, results='hide', fig.width=8, fig.height=8, fig.align="center"}
 processor(4, "CSCI112.csv", "CSCI112")
 ```
 </center>
@@ -96,7 +96,7 @@ processor(4, "CSCI112.csv", "CSCI112")
 **Course Learning Outcome 5**: Implement elementary iterative searching and sorting algorithms and discuss algorithm complexity and factors that influence the choice of an algorithm..
   
 <center>
-```{r, echo=FALSE, results='hide', fig.width=7, fig.height=3, fig.align="center"}
+```{r, echo=FALSE, results='hide', fig.width=8, fig.height=8, fig.align="center"}
 processor(5, "CSCI112.csv", "CSCI112")
 ```
 </center>
@@ -105,7 +105,7 @@ processor(5, "CSCI112.csv", "CSCI112")
 **Course Learning Outcome 6**: Describe the concept of recursion and develop software using recursive solutions to common problems in computing.
   
 <center>
-```{r, echo=FALSE, results='hide', fig.width=7, fig.height=3, fig.align="center"}
+```{r, echo=FALSE, results='hide', fig.width=8, fig.height=8, fig.align="center"}
 processor(6, "CSCI112.csv", "CSCI112")
 ```
 </center>
@@ -114,7 +114,7 @@ processor(6, "CSCI112.csv", "CSCI112")
 **Course Learning Outcome 7**: Use electronic spreadsheets to organize, analyze, and present data related to the temporal and spatial complexity of algorithms.
   
 <center>
-```{r, echo=FALSE, results='hide', fig.width=7, fig.height=3, fig.align="center"}
+```{r, echo=FALSE, results='hide', fig.width=8, fig.height=8, fig.align="center"}
 processor(7, "CSCI112.csv", "CSCI112")
 ```
 </center>
@@ -123,7 +123,7 @@ processor(7, "CSCI112.csv", "CSCI112")
 **Course Learning Outcome 8**: Use a database management system and create software that securely interacts with a database.
   
 <center>
-```{r, echo=FALSE, results='hide', fig.width=7, fig.height=3, fig.align="center"}
+```{r, echo=FALSE, results='hide', fig.width=8, fig.height=8, fig.align="center"}
 processor(8, "CSCI112.csv", "CSCI112")
 ```
 </center>
