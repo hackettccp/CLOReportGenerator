@@ -163,7 +163,7 @@ course_processor <- function(filename, course_code) {
     scale_x_continuous(breaks = seq(0, xscale, 10),
                        limits = c(0, xscale)) +
     labs(x = "Students", y = "", title = paste0(course_code, " Student Success Densities"),
-         subtitle="Average number of students below, meeting, or exceeding expectations") +
+         subtitle="Expected number of students below, meeting, or exceeding expectations") +
     scale_fill_manual(
       values = cc,
       name = "",

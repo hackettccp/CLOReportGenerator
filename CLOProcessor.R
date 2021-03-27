@@ -284,7 +284,7 @@ dens <- function(df, df2, xscale, cc) {
       x = "Students",
       y = "",
       title = paste0("Student Success Densities - CLO ", df$clonum),
-      subtitle = "Average number of students below, meeting, or \nexceeding expectations per section"
+      subtitle = "Expected number of students below, meeting, or \nexceeding expectations per section"
     ) +
     scale_fill_manual(values = values(cc, levels(df$desc), USE.NAMES =
                                         FALSE),
